@@ -8,6 +8,7 @@ Source: %{name}-%{version}.tar.gz
 Summary(de): Seriendateiübertragungsprotokolle
 Summary(fr): Protocoles de transfert de fichiers de série
 Summary(tr): Modem protokolleri
+BuildRequires: gettext-tools
 
 %description
 This collection of commands can be used to download and upload
