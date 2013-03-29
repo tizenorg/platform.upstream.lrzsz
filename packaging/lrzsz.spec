@@ -1,13 +1,12 @@
-Summary: lzrz - sz, rz, and friends
+Summary: Serial file transfer protocols
 Name: lrzsz
 Version: 0.12.20
-Release: 0
-Copyright: GPL
-Group: Applications/Communications
-Source: ${name}-${version}.tar.gz
-BuildRoot: /var/tmp/lrzsz-root
-Summary(de): lzrz - sz, rz und Co.
-Summary(fr): lzrz - sz, rz, et consorts
+Release: 1
+License: GPL-2.0
+Group: Network & Connectivity/Utilities
+Source: %{name}-%{version}.tar.gz
+Summary(de): SeriendateiÃ¼bertragungsprotokolle
+Summary(fr): Protocoles de transfert de fichiers de sÃ©rie
 Summary(tr): Modem protokolleri
 
 %description
@@ -16,69 +15,42 @@ files using the Z, X, and Y protocols.  Many terminal programs
 (like minicom) make use of these programs to transfer files.
 
 %description -l de
-Diese Sammlung von Befehlen läßt sich zum Herunter- und 
-Aufwärtsladen von Dateien anhand der Z-, X- und Y-Protokolle benutzen. 
-Viele Terminalprogramme (wie Minicom) setzen diese Programme für die
-Übertragung von Dateien ein. 
+Diese Sammlung von Befehlen lÃ¤ÃŸt sich zum Herunter- und
+AufwÃ¤rtsladen von Dateien anhand der Z-, X- und Y-Protokolle benutzen.
+Viele Terminalprogramme (wie Minicom) setzen diese Programme fÃ¼r die
+Ãœbertragung von Dateien ein.
 
 %description -l fr
-Cet ensemble de commande sert à télécharger des fichiers en utilisant
+Cet ensemble de commande sert Ã  tÃ©lÃ©charger des fichiers en utilisant
 les protocoles Z, X et Y. De nombreux programmes de terminal (comme
-minicom) utilisent ces programmes pour transférer les fichiers.
+minicom) utilisent ces programmes pour transfÃ©rer les fichiers.
 
 %description -l tr
-Bu komutlar topluluðu Z, X ve Y protokollerini kullanarak dosya aktarýmý
-için kullanýlabilir. Pek çok uç birim programý (örneðin minicom) dosya
-taþýmak için bu programlarý kullanýr.
+Bu komutlar topluluÃ°u Z, X ve Y protokollerini kullanarak dosya aktarÃ½mÃ½
+iÃ§in kullanÃ½labilir. Pek Ã§ok uÃ§ birim programÃ½ (Ã¶rneÃ°in minicom) dosya
+taÃ¾Ã½mak iÃ§in bu programlarÃ½ kullanÃ½r.
 
 %prep
-%setup
+%setup -q
 
 %build
-CFLAGS="$RPM_OPT_FLAGS" ./configure --prefix=/usr --program-transform-name=s/l//
+%configure --program-transform-name=s/l//
 make
 
 %install
-rm -rf $RPM_BUILD_ROOT
-
-make prefix=$RPM_BUILD_ROOT/usr install
-
-strip $RPM_BUILD_ROOT/usr/bin/{rb,rx,rz,sb,sx,sz}
+%makeinstall
 
 %files
+%license COPYING
 %defattr(-,root,root)
-%doc AUTHORS COMPATABILITY ChangeLog NEWS README README.gettext TODO THANKS README.cvs README.isdn4linux README.systems README.tests
-/usr/bin/sz
-/usr/bin/sb
-/usr/bin/sx
-/usr/bin/rz
-/usr/bin/rb
-/usr/bin/rx
-/usr/man/man1/sz.1
-/usr/man/man1/rz.1
-
-%clean
-rm -rf $RPM_BUILD_ROOT
-
-%changelog
-* Mon Dec 21 1998 Uwe Ohse <uwe@ohse.de>
-- stole redhats specfile and hacked it.
-  Redhat people: "Upgraded to 0.12.14 and changed makefiles so 
-  gettext isnt built." is that kind of problem the author would
-  have liked to know.
-
-* Sun Aug 16 1998 Jeff Johnson <jbj@redhat.com>
-- build root
-
-* Thu May 07 1998 Prospector System <bugs@redhat.com>
-- translations modified for de, fr, tr
-
-* Tue Oct 21 1997 Donnie Barnes <djb@redhat.com>
-- spec file cleanups 
-
-* Thu Jul 10 1997 Erik Troan <ewt@redhat.com>
-- built against glibc
-
-* Wed Mar 5 1997 msf@redhat.com <Michael Fulbright>
-- Upgraded to 0.12.14 and changed makefiles so gettext isnt built.
+%doc AUTHORS COMPATABILITY ChangeLog NEWS README README.gettext TODO THANKS README.cvs README.isdn4linux README.tests
+%{_bindir}/sz
+%{_bindir}/sb
+%{_bindir}/sx
+%{_bindir}/rz
+%{_bindir}/rb
+%{_bindir}/rx
+%{_mandir}/man1/sz.1.gz
+%{_mandir}/man1/rz.1.gz
+%lang(de) %{_datadir}/locale/de/LC_MESSAGES/lrzsz.mo
 
