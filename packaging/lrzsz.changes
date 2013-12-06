@@ -1,3 +1,8 @@
+* Fri Dec 06 2013 Łukasz Stelmach <l.stelmach@samsung.com> upstream/0.12.20@badaa09
+- Fix typos in sz man page
+- Fix a bug with 16 bit ZMODEM transfer
+- Adapt lrzsz.spec for Tizen
+
 * Mon Dec 21 1998 Uwe Ohse <uwe@ohse.de>
 - stole redhats specfile and hacked it.
   Redhat people: "Upgraded to 0.12.14 and changed makefiles so 
